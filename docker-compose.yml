@@ -1,0 +1,22 @@
+﻿
+services:
+  api:
+    build: ./backend
+    container_name: product-php-api
+    restart: unless-stopped
+    ports:
+      - "8085:80"
+    volumes:
+      - ./backend:/var/www/html
+    environment:
+      DB_HOST: belajar_mysql-db-1
+      DB_NAME: product_db
+      DB_USER: root
+      DB_PASS: ${DB_PASS}
+    networks:
+      - mysql_network
+
+networks:
+  mysql_network:
+    external: true
+    name: belajar_mysql_default
